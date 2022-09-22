@@ -9,7 +9,8 @@ public class Example5 {
         int loonies = 8;
         int toonies = 7;
 
-        double total = pennies * 0.01 + nickels * 0.05 + dimes * 0.1 + quarters * 0.25 + loonies * 1 + toonies * 2;
+        double total = pennies * 0.01 + nickels * 0.05 + 
+        dimes * 0.1 + quarters * 0.25 + loonies * 1 + toonies * 2;
         System.out.println(total);
 
     }
