@@ -12,7 +12,7 @@ public class exampleTwo {
 
         int sum = num1 + num2;
 
-        System.out.println(num1 + "+" + num2 + "=" + sum);
+        System.out.println(num1 + " + " + num2 + " = " + sum);
 
         in.close();
 
