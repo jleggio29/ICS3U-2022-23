@@ -5,11 +5,9 @@ public class exampleSeven {
 
         double fahrenheit = 98.0;
 
-        double celcius = (fahrenheit - 32) * 5 / 9;
+        double celcius = Math.round(((fahrenheit - 32) * 5 / 9) * 10) / 10.0;
 
-        double celciusRounded = Math.round(celcius * 10) / 10.0;
-
-        System.out.print("If the temperature is 98 degrees fahrenheit, it is " + celciusRounded + " degrees celcius");
+        System.out.print("If the temperature is 98 degrees fahrenheit, it is " + celcius + " degrees celcius");
     
     }
 }
