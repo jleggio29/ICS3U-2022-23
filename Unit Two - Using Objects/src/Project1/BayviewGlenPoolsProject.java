@@ -21,38 +21,35 @@ public class BayviewGlenPoolsProject {
         double deepHeight = in.nextDouble();
 
         System.out.println("Please enter the length of the transition in meters: ");
-        double transitionLength = in.nextDouble();
+        double transitionSlope = in.nextDouble();
 
-        System.out.println("Please enter the length of shallow end in meters: ");
+        System.out.println("Please enter the length of the shallow end in meters: ");
         double shallowLength = in.nextDouble();
 
-        System.out.println("Please enter the cost of the liner per meter squared: ");
+        System.out.println("Please enter the cost of the liner in dollars per meter squared: ");
         double linerCost = in.nextDouble();
 
         // Calculations:
 
+        // Other Dimensions:
+
+        double transitionHeight = (double) deepHeight - shallowHeight;
+        double transitionLength = (double) Math.sqrt(Math.pow(transitionSlope,2) - Math.pow(transitionHeight,2));
+        double deepLength = (double) length - shallowLength - transitionLength ;
+
         // Amount Of Water to Keep Pool 90% Full (Volume * 0.9, Then Converted From Meters Cubed To Gallons):
 
-        double transitionHeight = (deepHeight - shallowHeight);
-
-        double amountOfWater = ((shallowHeight * length * width) + (transitionHeight 
-        * width * (length - shallowLength 
-        - Math.sqrt(Math.pow(transitionLength,2) - Math.pow(transitionHeight,2)))) + (width * 
-        transitionHeight * Math.sqrt(Math.pow(transitionLength,2) - 
-        Math.pow(transitionHeight,2))) 
-        * 0.9);
+        double amountOfWater = (shallowHeight * length * width + transitionHeight * width * deepLength + 
+        width * transitionHeight * transitionLength / 2) * 0.9;
 
         double amountOfWaterInGallons = amountOfWater * 264.17205;
 
-        // Amount Of Liner For Pool (Surface Area In Meters Squared - Area Of Top Of Pool)
+        // Amount Of Liner Needed For Pool (Surface Area In Meters Squared - Area Of Top Of Pool)
 
-        double amountOfLiner = (width * deepHeight) + (width * shallowHeight) + 
-        (2 * ((length * shallowHeight) 
-        + (Math.sqrt(Math.pow(transitionLength,2) - Math.pow(deepHeight - shallowHeight,2)) 
-        * transitionHeight) + ((transitionHeight * Math.sqrt(Math.pow(transitionLength,2) 
-        - Math.pow(deepHeight - shallowHeight,2)))/2))); 
+        double amountOfLiner = width * deepHeight + width * shallowHeight + 
+        2 * (length * shallowHeight + transitionLength * transitionHeight / 2 + deepLength * transitionHeight); 
 
-        // Cost Of Liner For Pool (Amount Of Liner In Meters Squared * Price Of Liner Per Meter Squared)
+        // Cost Of Liner Needed For Pool (Amount Of Liner Needed For Pool In Meters Squared * Price Of Liner In Dollars Per Meter Squared)
       
         double costLiner = amountOfLiner * linerCost; 
 
