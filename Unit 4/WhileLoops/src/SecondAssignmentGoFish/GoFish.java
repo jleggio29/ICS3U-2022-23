@@ -351,7 +351,6 @@ private static String playerTurn(String playerOneHand, String computerOneHand, S
          System.out.println("Do you have a(an): ");
          }
          
-
       }else{
 
       if(computerOneHand.indexOf(cardSelect) >= 1){
