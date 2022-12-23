@@ -25,21 +25,25 @@ public class GoFish {
    
    public static void main(String[] args) {
         
+      // Takes the player's first hand and removes pairs.
       playerOneHand = newHand(playerOneHand);
       computerOneHand = newHand(computerOneHand);
       computerTwoHand = newHand(computerTwoHand);
       computerThreeHand = newHand(computerThreeHand);   
 
+      // Displays each player's hand.
       displayHand(playerOneHand, false, "Player One: ");
       displayHand(computerOneHand, true, "Computer One: ");
       displayHand(computerTwoHand, true, "Computer Two: ");
       displayHand(computerThreeHand, true, "Computer Three: ");
 
+      // Displays each player's points.
       System.out.println("Player One Points: " + playerOnePoints);
       System.out.println("Computer One Points: " + computerOnePoints);
       System.out.println("Computer Two Points: " + computerTwoPoints);
       System.out.println("Computer Three Points: " + computerThreePoints);
 
+      // Loop for the when the game is being played
       boolean isPlaying = true;     
       while (isPlaying){
               
@@ -84,6 +88,7 @@ public class GoFish {
       }
    }
 
+// Asks if you want to play again after the game has finished.
 private static boolean playAgain() {
       while (true) {
          System.out.println("Play Again? ([Y]es/[N]o): ");
@@ -104,232 +109,13 @@ private static boolean playAgain() {
       }
    }
 
+// Deals 5 cards to a player.
 private static String dealCards() {
       return getCard()  + " " + getCard() + " " + getCard() + " " + getCard() + " " + getCard() + " ";
       
    }
 
-private static String computerOneTurn(){
-       
-String card = computerOneHand.substring(0,1);
-if (card.equals("1")){
-     card = "10";
-   }
-int whoVariable = (int)(Math.random() * 3 + 1);
-String who = Integer.toString(whoVariable);
-
-if (who.equals("1")){
-   System.out.println("Computer One picked Player One");   
-    if (playerOneHand.indexOf(card) > 0) {
-      System.out.println("They had the card!");
-      computerOneHand = computerOneHand.substring(0,computerOneHand.indexOf(card)) + computerOneHand.substring(computerOneHand.indexOf(card) + 3);
-      playerOneHand = playerOneHand.substring(0,playerOneHand.indexOf(card)) + playerOneHand.substring(playerOneHand.indexOf(card) + 3);
-      computerOnePoints++;
-       
-    }else{
-      System.out.println("GO FISH");
-        computerOneHand += getCard();
-       
-    }
-}else if (who.equals("2")){
-   System.out.println("Computer One picked Computer Two");
-    if (computerTwoHand.indexOf(card) > 0) {
-      System.out.println("They had the card!");
-      computerOneHand = computerOneHand.substring(0,computerOneHand.indexOf(card)) + computerOneHand.substring(playerOneHand.indexOf(card) + 3);
-      computerTwoHand = computerTwoHand.substring(0,computerTwoHand.indexOf(card)) + computerTwoHand.substring(computerTwoHand.indexOf(card) + 3);
-      computerOnePoints++;
-    }else{
-       System.out.println("GO FISH");
-        computerOneHand += getCard();
-       
-    }
-}else if (who.equals("3")){
-   System.out.println("Computer One picked Computer Three");
-    if (computerThreeHand.indexOf(card) > 0) {
-      computerOneHand = computerOneHand.substring(0,computerOneHand.indexOf(card)) + computerOneHand.substring(playerOneHand.indexOf(card) + 3);
-      computerThreeHand = computerThreeHand.substring(0,computerThreeHand.indexOf(card)) + computerThreeHand.substring(computerThreeHand.indexOf(card) + 3);
-      computerOnePoints++;
-      
-    }else{
-         System.out.println("GO FISH");
-        computerOneHand += getCard();
-      
-      }
-   }
-      return computerOneHand;
-}
-
-private static String computerTwoTurn(){
-       
-   String card = computerOneHand.substring(0,1);
-   if (card.equals("1")){
-        card = "10";
-      }
-   int whoVariable = (int)(Math.random() * 3 + 1);
-   String who = Integer.toString(whoVariable);
-   
-   if (who.equals("1")){
-      System.out.println("Computer Two picked Player One");   
-       if (playerOneHand.indexOf(card) > 0) {
-         System.out.println("They had the card!");
-         computerTwoHand = computerTwoHand.substring(0,computerTwoHand.indexOf(card)) + computerTwoHand.substring(computerTwoHand.indexOf(card) + 3);
-         playerOneHand = playerOneHand.substring(0,playerOneHand.indexOf(card)) + playerOneHand.substring(playerOneHand.indexOf(card) + 3);
-         computerTwoPoints++;
-          
-       }else{
-         System.out.println("GO FISH");
-           computerTwoHand += getCard();
-          
-       }
-   }else if (who.equals("2")){
-      System.out.println("Computer Two picked Computer One");
-       if (computerTwoHand.indexOf(card) > 0) {
-         System.out.println("They had the card!");
-         computerTwoHand = computerTwoHand.substring(0,computerTwoHand.indexOf(card)) + computerTwoHand.substring(computerTwoHand.indexOf(card) + 3);
-         computerOneHand = computerOneHand.substring(0,computerOneHand.indexOf(card)) + computerOneHand.substring(playerOneHand.indexOf(card) + 3);
-         computerTwoPoints++;
-       }else{
-          System.out.println("GO FISH");
-           computerTwoHand += getCard();
-          
-       }
-   }else if (who.equals("3")){
-      System.out.println("Computer Two picked Computer Three");
-       if (computerThreeHand.indexOf(card) > 0) {
-         computerTwoHand = computerOneHand.substring(0,computerTwoHand.indexOf(card)) + computerTwoHand.substring(computerTwoHand.indexOf(card) + 3);
-         computerThreeHand = computerThreeHand.substring(0,computerThreeHand.indexOf(card)) + computerThreeHand.substring(computerThreeHand.indexOf(card) + 3);
-         computerTwoPoints++;
-         
-       }else{
-            System.out.println("GO FISH");
-           computerTwoHand += getCard();
-         
-         }
-      }
-         return computerTwoHand;
-   }
-
-   private static String computerThreeTurn(){
-       
-      String card = computerOneHand.substring(0,1);
-      if (card.equals("1")){
-           card = "10";
-         }
-      int whoVariable = (int)(Math.random() * 3 + 1);
-      String who = Integer.toString(whoVariable);
-      
-      if (who.equals("1")){
-         System.out.println("Computer Three picked Player One");   
-          if (playerOneHand.indexOf(card) > 0) {
-            System.out.println("They had the card!");
-            computerThreeHand = computerThreeHand.substring(0,computerThreeHand.indexOf(card)) + computerThreeHand.substring(computerThreeHand.indexOf(card) + 3);
-            playerOneHand = playerOneHand.substring(0,playerOneHand.indexOf(card)) + playerOneHand.substring(playerOneHand.indexOf(card) + 3);
-            computerThreePoints++;
-             
-          }else{
-            System.out.println("GO FISH");
-              computerThreeHand += getCard();
-             
-          }
-      }else if (who.equals("2")){
-         System.out.println("Computer Three picked Computer One");
-          if (computerTwoHand.indexOf(card) > 0) {
-            System.out.println("They had the card!");
-            computerThreeHand = computerThreeHand.substring(0,computerThreeHand.indexOf(card)) + computerThreeHand.substring(computerThreeHand.indexOf(card) + 3);
-            computerOneHand = computerOneHand.substring(0,computerOneHand.indexOf(card)) + computerOneHand.substring(playerOneHand.indexOf(card) + 3);
-            computerThreePoints++;
-          }else{
-             System.out.println("GO FISH");
-              computerThreeHand += getCard();
-             
-          }
-      }else if (who.equals("3")){
-         System.out.println("Computer Three picked Computer Two");
-          if (computerThreeHand.indexOf(card) > 0) {
-            computerThreeHand = computerThreeHand.substring(0,computerThreeHand.indexOf(card)) + computerThreeHand.substring(computerThreeHand.indexOf(card) + 3);
-            computerTwoHand = computerOneHand.substring(0,computerTwoHand.indexOf(card)) + computerTwoHand.substring(computerTwoHand.indexOf(card) + 3);
-            computerThreePoints++;
-            
-          }else{
-               System.out.println("GO FISH");
-              computerThreeHand += getCard();
-            
-            }
-         }
-            return computerThreeHand;
-      }
-
-   private static String newHand(String cards) {
-      String firstHand = cards;
-
-      for(int i = 0; i<cards.length(); i++){
-       String start = cards.substring(i, i+1);
-       String restOf = cards.substring(i+1);
-       if("JQK10A23456789".indexOf(start)>=0){
-           if(restOf.indexOf(start)>=0){
-               String newHand = "";
-               int location1 = cards.indexOf(start);
-               int location2 = cards.lastIndexOf(start);
-
-               newHand = cards.substring(0, location1) + cards.substring(location1+3, location2) + cards.substring(location2+3);
-               
-               cards = newHand;
-               i = 0; 
-                  
-           }
-       }
-           
-   }
-   
-      firstHand = cards;
-   
-      return firstHand;
-
-   }
-
-   private static void displayHand(String cards, boolean isHidden, String label) {
-      String result = "";
-   if (isHidden){
-      for (int i = 0; i<cards.length();i++){
-         String s = cards.substring(i, i+1);
-
-         if (s.equals(" ")){
-            result += " ";
-         }else if ("123456789JKQA".indexOf(s)>0){
-            result += "X";
-         }
-      }
-      result = label + result;
-   }
-   else {
-      result += label + cards;
-   }
-
-   System.out.println(result);
-   }
-
-
-
-
-private static int playerPoints(String playerOneHand) {
-
-      int score = 0;
-
-      for(int i = 0; i<playerOneHand.length(); i++){
-          String startHand = playerOneHand.substring(i, i+1);
-          String restOf = playerOneHand.substring(i+1);
-          if("234567891JQKA".indexOf(startHand)>=0){
-              if(restOf.indexOf(startHand)>=0){
-                  score++;
-              }
-          }
-          if (score == 3){
-            score--;
-          }
-   }
-      return score;
-}
-
+// The manual player's turn.
 private static String playerTurn(String playerOneHand, String computerOneHand, String computerTwoHand, String computerThree4Hand ) {
 
    System.out.println("Player One's Turn ");
@@ -351,10 +137,10 @@ private static String playerTurn(String playerOneHand, String computerOneHand, S
          System.out.println("Do you have a(an): ");
          }
          
-      }else{
+      }
+      else if (playerOneHand.indexOf(cardSelect)>=1) {
 
       if(computerOneHand.indexOf(cardSelect) >= 1){
-
 
          System.out.println("They had the card!");
 
@@ -362,7 +148,8 @@ private static String playerTurn(String playerOneHand, String computerOneHand, S
          playerOneHand = playerOneHand.substring(0,cardIndex) + playerOneHand.substring(cardIndex + 3);
          playerOnePoints++;
 
-      }else{
+      }
+      else{
          System.out.println("GO FISH");
          playerOneHand = playerOneHand += " " + getCard();
       }
@@ -443,10 +230,236 @@ private static String playerTurn(String playerOneHand, String computerOneHand, S
    return playerOneHand;
 }
 
+// The turn of the first computer player.
+private static String computerOneTurn(){
+       
+String card = computerOneHand.substring(0,1);
+if (card.equals("1")){
+     card = "10";
+   }
+int whoVariable = (int)(Math.random() * 3 + 1);
+String who = Integer.toString(whoVariable);
+
+if (who.equals("1")){
+   System.out.println("Computer One picked Player One");   
+    if (playerOneHand.indexOf(card) > 0) {
+      System.out.println("They had the card!");
+      computerOneHand = computerOneHand.substring(0,computerOneHand.indexOf(card)) + computerOneHand.substring(computerOneHand.indexOf(card) + 3);
+      playerOneHand = playerOneHand.substring(0,playerOneHand.indexOf(card)) + playerOneHand.substring(playerOneHand.indexOf(card) + 3);
+      computerOnePoints++;
+       
+    }else{
+      System.out.println("GO FISH");
+        computerOneHand += getCard();
+       
+    }
+}else if (who.equals("2")){
+   System.out.println("Computer One picked Computer Two");
+    if (computerTwoHand.indexOf(card) > 0) {
+      System.out.println("They had the card!");
+      computerOneHand = computerOneHand.substring(0,computerOneHand.indexOf(card)) + computerOneHand.substring(playerOneHand.indexOf(card) + 3);
+      computerTwoHand = computerTwoHand.substring(0,computerTwoHand.indexOf(card)) + computerTwoHand.substring(computerTwoHand.indexOf(card) + 3);
+      computerOnePoints++;
+    }else{
+       System.out.println("GO FISH");
+        computerOneHand += getCard();
+       
+    }
+}else if (who.equals("3")){
+   System.out.println("Computer One picked Computer Three");
+    if (computerThreeHand.indexOf(card) > 0) {
+      computerOneHand = computerOneHand.substring(0,computerOneHand.indexOf(card)) + computerOneHand.substring(playerOneHand.indexOf(card) + 3);
+      computerThreeHand = computerThreeHand.substring(0,computerThreeHand.indexOf(card)) + computerThreeHand.substring(computerThreeHand.indexOf(card) + 3);
+      computerOnePoints++;
+      
+    }else{
+         System.out.println("GO FISH");
+        computerOneHand += getCard();
+      
+      }
+   }
+      return computerOneHand;
+}
+
+// The turn of the second computer player
+private static String computerTwoTurn(){
+       
+   String card = computerOneHand.substring(0,1);
+   if (card.equals("1")){
+        card = "10";
+      }
+   int whoVariable = (int)(Math.random() * 3 + 1);
+   String who = Integer.toString(whoVariable);
+   
+   if (who.equals("1")){
+      System.out.println("Computer Two picked Player One");   
+       if (playerOneHand.indexOf(card) > 0) {
+         System.out.println("They had the card!");
+         computerTwoHand = computerTwoHand.substring(0,computerTwoHand.indexOf(card)) + computerTwoHand.substring(computerTwoHand.indexOf(card) + 3);
+         playerOneHand = playerOneHand.substring(0,playerOneHand.indexOf(card)) + playerOneHand.substring(playerOneHand.indexOf(card) + 3);
+         computerTwoPoints++;
+          
+       }else{
+         System.out.println("GO FISH");
+           computerTwoHand += getCard();
+          
+       }
+   }else if (who.equals("2")){
+      System.out.println("Computer Two picked Computer One");
+       if (computerTwoHand.indexOf(card) > 0) {
+         System.out.println("They had the card!");
+         computerTwoHand = computerTwoHand.substring(0,computerTwoHand.indexOf(card)) + computerTwoHand.substring(computerTwoHand.indexOf(card) + 3);
+         computerOneHand = computerOneHand.substring(0,computerOneHand.indexOf(card)) + computerOneHand.substring(playerOneHand.indexOf(card) + 3);
+         computerTwoPoints++;
+       }else{
+          System.out.println("GO FISH");
+           computerTwoHand += getCard();
+          
+       }
+   }else if (who.equals("3")){
+      System.out.println("Computer Two picked Computer Three");
+       if (computerThreeHand.indexOf(card) > 0) {
+         computerTwoHand = computerOneHand.substring(0,computerTwoHand.indexOf(card)) + computerTwoHand.substring(computerTwoHand.indexOf(card) + 3);
+         computerThreeHand = computerThreeHand.substring(0,computerThreeHand.indexOf(card)) + computerThreeHand.substring(computerThreeHand.indexOf(card) + 3);
+         computerTwoPoints++;
+         
+       }else{
+            System.out.println("GO FISH");
+           computerTwoHand += getCard();
+         
+         }
+      }
+         return computerTwoHand;
+   }
+
+   // The turn of the third computer player
+   private static String computerThreeTurn(){
+       
+      String card = computerOneHand.substring(0,1);
+      if (card.equals("1")){
+           card = "10";
+         }
+      int whoVariable = (int)(Math.random() * 3 + 1);
+      String who = Integer.toString(whoVariable);
+      
+      if (who.equals("1")){
+         System.out.println("Computer Three picked Player One");   
+          if (playerOneHand.indexOf(card) > 0) {
+            System.out.println("They had the card!");
+            computerThreeHand = computerThreeHand.substring(0,computerThreeHand.indexOf(card)) + computerThreeHand.substring(computerThreeHand.indexOf(card) + 3);
+            playerOneHand = playerOneHand.substring(0,playerOneHand.indexOf(card)) + playerOneHand.substring(playerOneHand.indexOf(card) + 3);
+            computerThreePoints++;
+             
+          }else{
+            System.out.println("GO FISH");
+              computerThreeHand += getCard();
+             
+          }
+      }else if (who.equals("2")){
+         System.out.println("Computer Three picked Computer One");
+          if (computerTwoHand.indexOf(card) > 0) {
+            System.out.println("They had the card!");
+            computerThreeHand = computerThreeHand.substring(0,computerThreeHand.indexOf(card)) + computerThreeHand.substring(computerThreeHand.indexOf(card) + 3);
+            computerOneHand = computerOneHand.substring(0,computerOneHand.indexOf(card)) + computerOneHand.substring(playerOneHand.indexOf(card) + 3);
+            computerThreePoints++;
+          }else{
+             System.out.println("GO FISH");
+              computerThreeHand += getCard();
+             
+          }
+      }else if (who.equals("3")){
+         System.out.println("Computer Three picked Computer Two");
+          if (computerThreeHand.indexOf(card) > 0) {
+            computerThreeHand = computerThreeHand.substring(0,computerThreeHand.indexOf(card)) + computerThreeHand.substring(computerThreeHand.indexOf(card) + 3);
+            computerTwoHand = computerOneHand.substring(0,computerTwoHand.indexOf(card)) + computerTwoHand.substring(computerTwoHand.indexOf(card) + 3);
+            computerThreePoints++;
+            
+          }else{
+               System.out.println("GO FISH");
+              computerThreeHand += getCard();
+            
+            }
+         }
+            return computerThreeHand;
+      }
+
+   // How pairs are removed from any player's original hand.
+   private static String newHand(String cards) {
+      String firstHand = cards;
+
+      for(int i = 0; i<cards.length(); i++){
+       String start = cards.substring(i, i+1);
+       String restOf = cards.substring(i+1);
+       if("JQK10A23456789".indexOf(start)>=0){
+           if(restOf.indexOf(start)>=0){
+               String newHand = "";
+               int location1 = cards.indexOf(start);
+               int location2 = cards.lastIndexOf(start);
+
+               newHand = cards.substring(0, location1) + cards.substring(location1+3, location2) + cards.substring(location2+3);
+               
+               cards = newHand;
+               i = 0; 
+                  
+           }
+       }
+           
+   }
+   
+      firstHand = cards;
+   
+      return firstHand;
+
+   }
+
+   // Displays any player's hand.
+   private static void displayHand(String cards, boolean isHidden, String label) {
+      String result = "";
+   if (isHidden){
+      for (int i = 0; i<cards.length();i++){
+         String s = cards.substring(i, i+1);
+
+         if (s.equals(" ")){
+            result += " ";
+         }else if ("123456789JKQA".indexOf(s)>0){
+            result += "X";
+         }
+      }
+      result = label + result;
+   }
+   else {
+      result += label + cards;
+   }
+
+   System.out.println(result);
+   }
+
+// Calculates any players's points after they are dealt their first hand and displays any player's point throughout the game.
+private static int playerPoints(String playerOneHand) {
+
+      int score = 0;
+
+      for(int i = 0; i<playerOneHand.length(); i++){
+          String startHand = playerOneHand.substring(i, i+1);
+          String restOf = playerOneHand.substring(i+1);
+          if("234567891JQKA".indexOf(startHand)>=0){
+              if(restOf.indexOf(startHand)>=0){
+                  score++;
+              }
+          }
+          if (score == 3){
+            score--;
+          }
+   }
+      return score;
+}
+
+// Puts a card value and card suit together to make a card.
 private static String getCard() {
     return getValue() + getSuit();
  }
 
+// Gets a random suit for a card.
 private static String getSuit() {
     int iSuit = (int) (Math.random() * NUM_SUITS) + 1;
 
@@ -459,6 +472,8 @@ private static String getSuit() {
     else
        return DIAMONDS;
  }
+
+// Gets a random card value.
 private static String getValue() {
     int iValue = (int) (Math.random() * NUM_VALUES) + 1;
 
@@ -475,4 +490,3 @@ private static String getValue() {
     }
 
 }
-   
