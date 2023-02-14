@@ -391,10 +391,12 @@ public class DoubleArraySequence implements Cloneable {
     **/
    public boolean isCurrent() { // see if sequence has a specified current element
 
-      if(manyItems == currentIndex)
+      if(manyItems == currentIndex){
       return false;
-     else
+      }
+      else{
       return true;
+      }
    }
 
    /**
@@ -418,11 +420,10 @@ public class DoubleArraySequence implements Cloneable {
     **/
    public void removeCurrent() {
       if(currentIndex == manyItems)
-         throw new IllegalStateException("no current element");
+         throw new IllegalStateException("No current element");
 
-         int start = currentIndex;
-         data[currentIndex] = 0;
-         for (int i = start; i < data.length-1; i++) {
+         int current = currentIndex;
+         for (int i = current; i < data.length - 1; i++) {
             data[i] = data[i+1];
             data[i+1] = 0;
          }
@@ -491,5 +492,6 @@ public class DoubleArraySequence implements Cloneable {
    // The new double array sequence is a copy of the DoubleArraySequence src.
    public DoubleArraySequence(DoubleArraySequence src) {
       data = new double[src.data.length];
+      
    }
 }
